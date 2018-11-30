@@ -2,9 +2,6 @@
 ## Install Wordpress on CentOS7
 DIRECTORY=$(cd `dirname $0` && pwd)
 
-add_proxy_repo(){
-    echo "proxy=http://103.101.161.200:3142" >> /etc/yum.conf
-}
 turnoff_firewalld_selinux(){
     sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
     sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
@@ -50,7 +47,6 @@ config_wordpress(){
     sed -i "s/define('DB_USER', 'username_here');/define('DB_USER', 'wordpressuser');/g" /var/www/html/wp-config.php
     sed -i "s/define('DB_PASSWORD', 'password_here');/define('DB_PASSWORD', 'password');/g" /var/www/html/wp-config.php
 }
-add_proxy_repo
 turnoff_firewalld_selinux
 install_httpd
 install_mariadb
